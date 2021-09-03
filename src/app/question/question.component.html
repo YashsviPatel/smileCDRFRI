@@ -1,0 +1,38 @@
+<form class="k-form" [formGroup]="form" >
+    <h1>Add Patient Details</h1>
+    <fieldset class="k-form-fieldset">
+    <ng-container *ngFor="let item of questionsTemp">
+    <kendo-formfield *ngIf="item.type === 'checkbox'">
+            <input kendoCheckBox id="{{item.key}}" type="checkbox" [formControlName]="item.key" />
+            <kendo-label class="k-checkbox-label" for="terms" text="{{item.label}}"></kendo-label>
+    </kendo-formfield>
+    <h2>    <kendo-label *ngIf="item.type === 'label'" class="k-checkbox-label" text="{{item.label}}"></kendo-label>
+    </h2>
+    <kendo-formfield *ngIf="item.type === 'textbox'">
+        <kendo-label class="k-checkbox-label" for="terms" text="{{item.label}}"></kendo-label>
+        <kendo-textbox  [formControlName]="item.key"
+      ></kendo-textbox>
+    </kendo-formfield>
+    <kendo-formfield *ngIf="item.type === 'radio' || item.type === 'radio1'">
+        <kendo-label class="k-checkbox-label" for="terms" text="{{item.label}}"></kendo-label>
+        <ng-container *ngFor="let val of item.options">
+            <label class="k-label" [for]="val">{{val}}</label>
+            <input type="radio" name="{{item.key}}" value="{{val}}" [formControlName]="item.key" kendoRadioButton />
+        </ng-container>
+        
+    </kendo-formfield>
+    <kendo-formfield *ngIf="item.type === 'datepicker'">
+        <kendo-label class="k-checkbox-label" for="terms" text="{{item.label}}"></kendo-label>
+        <kendo-datepicker  [formControlName]="item.key"   >
+        </kendo-datepicker>
+
+        
+    </kendo-formfield>
+    
+</ng-container>
+</fieldset>
+<div class="k-form-buttons">
+    <button class="k-button k-primary" (click)="save()">Login</button>  
+</div>
+</form>
+
